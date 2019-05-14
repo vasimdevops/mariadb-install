@@ -1,0 +1,16 @@
+- name : installing mariadb
+  hosts : all
+  become : yes
+  tasks :
+    - name : installing mariadb-server and mariadb
+      yum :
+        name : "{{item}}"
+        state : latest
+      loop :
+        - mariadb-server
+        - mariadb
+    - name : starting mariadb
+      service :
+        name : mariadb
+        state : started
+        enabled : yes
